@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Tycoon OS - Happy Birthday Gunjan!</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #121212; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .iphone-container { width: 360px; background-color: #ff6f00; border: 8px solid #333; border-radius: 40px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; padding: 4px; }
+        .iphone-inner { background: #1e1e1e; border-radius: 36px; overflow: hidden; width: 100%; height: 100%; }
+        .notch { height: 25px; background: #000; width: 150px; margin: 0 auto; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; }
+        .status-bar { background-color: #ff6f00; padding: 30px 15px 5px 15px; display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; color: white; }
+        .birthday-banner { background: linear-gradient(135deg, #ff6f00, #ff8f00); padding: 15px; text-align: center; border-bottom: 2px solid #e65100; }
+        .birthday-banner h1 { font-size: 20px; margin-bottom: 5px; color: #fff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .birthday-banner p { font-size: 11px; color: #ffe0b2; }
+        .game-body { padding: 15px; display: flex; flex-direction: column; gap: 15px; }
+        .map-section { background: #263238; border: 2px solid #ff6f00; border-radius: 15px; padding: 10px; text-align: center; }
+        .map-title { font-size: 13px; font-weight: bold; margin-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .room { background: #37474f; border-radius: 8px; padding: 8px; font-size: 11px; text-align: left; border-left: 4px solid #b0bec5; }
+        .room.active { border-left-color: #4caf50; }
+        .room-status { float: right; font-weight: bold; color: #b0bec5; }
+        .room.active .room-status { color: #4caf50; }
+        .stats-panel { display: flex; justify-content: space-between; background: #2d2d2d; padding: 10px; border-radius: 10px; text-align: center; }
+        .stat-box text { font-size: 10px; color: #aaa; text-transform: uppercase; display: block; }
+        .stat-box val { font-size: 16px; font-weight: bold; color: #ff8f00; }
+        .boost-section { background: #2d2d2d; padding: 10px; border-radius: 10px; }
+        .boost-title { font-size: 12px; display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .slider { width: 100%; -webkit-appearance: none; background: #444; height: 6px; border-radius: 3px; outline: none; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: #ff6f00; cursor: pointer; }
+        .btn-group { display: flex; gap: 8px; }
+        .btn { flex: 1; padding: 12px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 13px; transition: transform 0.1s; }
+        .btn:active { transform: scale(0.95); }
+        .btn-orange { background: #ff6f00; color: white; }
+        .btn-blue { background: #1e88e5; color: white; }
+        .btn-gray { background: #424242; color: #ccc; }
+        .upgrade-section { background: #2d2d2d; padding: 10px; border-radius: 10px; }
+        .upgrade-title { font-size: 12px; margin-bottom: 8px; color: #aaa; }
+        .upgrade-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .up-btn { background: #3a3a3a; border: 1px solid #555; color: #fff; padding: 8px; border-radius: 6px; font-size: 11px; cursor: pointer; text-align: center; }
+        .up-btn span { color: #ffb74d; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="iphone-container">
+    <div class="iphone-inner">
+        <div class="notch"></div>
+        <div class="status-bar">
+            <span>9:41 📱</span>
+            <span style="color: #ffe0b2;">Hotel Tycoon OS</span>
+            <span>5G 🔋</span>
+        </div>
+        
+        <div class="birthday-banner">
+            <h1>🎉 Happy Birthday Gunjan! 🎂</h1>
+            <p>Manage your premium hotel empire & celebrate in style!</p>
+        </div>
+
+        <div class="game-body">
+            <div class="map-section">
+                <div class="map-title">🏨 Gunjan's Grand Hotel Map Layout</div>
+                <div class="grid">
+                    <div class="room" id="r101"><span class="room-status" id="s101">Vacant</span>Rm 101<br><span id="n101">-</span></div>
+                    <div class="room" id="r102"><span class="room-status" id="s102">Vacant</span>Rm 102<br><span id="n102">-</span></div>
+                    <div class="room" id="r201"><span class="room-status" id="s201">Vacant</span>Rm 201<br><span id="n201">-</span></div>
+                    <div class="room active" id="r202"><span class="room-status" id="s202">Charlie</span>Rm 202<br><span id="n202">⭐⭐⭐</span></div>
+                    <div class="room active" id="r301"><span class="room-status" id="s301">Gunjan 👑</span>Rm 301<br><span id="n301">⭐⭐⭐⭐⭐</span></div>
+                    <div class="room active" id="r302"><span class="room-status" id="s302">Alex</span>Rm 302<br><span id="n302">⭐⭐⭐⭐</span></div>
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-box"><text>Revenue</text><val id="lbl-rev">$248</val></div>
+                <div class="stat-box"><text>Active Guests</text><val id="lbl-guests">3 / 6</val></div>
+                <div class="stat-box"><text>Hotel Level</text><val id="lbl-level">★ 3 Star</val></div>
+            </div>
+
+            <div class="boost-section">
+                <div class="boost-title"><span>Tip & Generation Multiplier Boost</span><span id="lbl-boost" style="color:#ff6f00; font-weight:bold;">2.4x</span></div>
+                <input type="range" min="1" max="5" step="0.1" value="2.4" class="slider" id="boost-slider">
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-orange" onclick="checkIn()">Check-in</button>
+                <button class="btn btn-blue" onclick="collectCash()">Collect $$</button>
+                <button class="btn btn-gray" onclick="upgradeMax()">Upgrade Max</button>
+            </div>
+
+            <div class="upgrade-section">
+                <div class="upgrade-title">QUICK UPGRADE ROOM QUALITY</div>
+                <div class="upgrade-grid">
+                    <button class="up-btn" onclick="buyUpgrade(101)">Rm 101 <span>+$100</span></button>
+                    <button class="up-btn" onclick="buyUpgrade(102)">Rm 102 <span>+$100</span></button>
+                    <button class="up-btn" onclick="buyUpgrade(201)">Rm 201 <span>+$100</span></button>
+                    <button class="up-btn" onclick="buyUpgrade(202)">Rm 202 <span>+$100</span></button>
+                    <button class="up-btn" onclick="buyUpgrade(301)">Rm 301 <span>+$100</span></button>
+                    <button class="up-btn" onclick="buyUpgrade(302)">Rm 302 <span>+$100</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let revenue = 248;
+    let activeGuests = 3;
+    let multiplier = 2.4;
+    const guestNames = ["Rahul", "Priya", "Sneha", "Kabir", "Rohan", "Ananya"];
+    const rooms = {
+        101: { active: false, name: "-", stars: "" },
+        102: { active: false, name: "-", stars: "" },
+        201: { active: false, name: "-", stars: "" },
+        202: { active: true, name: "Charlie", stars: "⭐⭐⭐" },
+        301: { active: true, name: "Gunjan 👑", stars: "⭐⭐⭐⭐⭐" },
+        302: { active: true, name: "Alex", stars: "⭐⭐⭐⭐" }
+    };
+
+    document.getElementById('boost-slider').addEventListener('input', function(e) {
+        multiplier = parseFloat(e.target.value);
+        document.getElementById('lbl-boost').innerText = multiplier.toFixed(1) + 'x';
+    });
+
+    function updateUI() {
+        document.getElementById('lbl-rev').innerText = '$' + Math.floor(revenue);
+        document.getElementById('lbl-guests').innerText = activeGuests + ' / 6';
+        
+        for (let rId in rooms) {
+            let roomEl = document.getElementById('r' + rId);
+            let statusEl = document.getElementById('s' + rId);
+            let nameEl = document.getElementById('n' + rId);
+            
+            if (rooms[rId].active) {
+                roomEl.classList.add('active');
+                statusEl.innerText = rooms[rId].name;
+                if(nameEl) nameEl.innerText = rooms[rId].stars || "⭐";
+            } else {
+                roomEl.classList.remove('active');
+                statusEl.innerText = "Vacant";
+                if(nameEl) nameEl.innerText = "-";
+            }
+        }
+    }
+
+    function checkIn() {
+        let vacantRooms = Object.keys(rooms).filter(r => !rooms[r].active);
+        if (vacantRooms.length === 0) {
+            alert("होटल फुल है! पहले कमरों से कैश कलेक्ट करें।");
+            return;
+        }
+        let randomRoom = vacantRooms[Math.floor(Math.random() * vacantRooms.length)];
+        let randomName = guestNames[Math.floor(Math.random() * guestNames.length)];
+        rooms[randomRoom].active = true;
+        rooms[randomRoom].name = randomName;
+        rooms[randomRoom].stars = "⭐";
+        activeGuests++;
+        updateUI();
+    }
+
+    function collectCash() {
+        if(activeGuests === 0) {
+            alert("होटल में कोई मेहमान नहीं है!");
+            return;
+        }
+        let earnings = activeGuests * 50 * multiplier;
+        revenue += earnings;
+        alert("गूंजन ने मेहमानों से $" + Math.floor(earnings) + " का रेवेन्यू और टिप कलेक्ट की! 💰");
+        
+        for (let rId in rooms) {
+            if(rooms[rId].active && rooms[rId].name !== "Gunjan 👑") {
+                if(Math.random() > 0.5) {
+                    rooms[rId].active = false;
+                    activeGuests--;
+                }
+            }
+        }
+        updateUI();
+    }
+
+    function buyUpgrade(rId) {
+        if(revenue >= 100) {
+            revenue -= 100;
+            if(rooms[rId].stars.length < 5) {
+                rooms[rId].stars += "⭐";
+            }
+            alert("Room " + rId + " की लग्जरी क्वालिटी बढ़ा दी गई है!");
+            updateUI();
+        } else {
+            alert("अपग्रेड करने के लिए पर्याप्त कैश ($100) नहीं है!");
+        }
+    }
+
+    function upgradeMax() {
+        if(revenue >= 300) {
+            revenue -= 300;
+            document.getElementById('lbl-level').innerText = "★ 5 Star";
+            alert("बधाई हो! गूंजन ने होटल को 5-Star VIP पैलेस में अपग्रेड कर दिया! 👑🏰");
+            updateUI();
+        } else {
+            alert("5-Star अपग्रेड के लिए $300 चाहिए!");
+        }
+    }
+</script>
+</body>
+</html>
